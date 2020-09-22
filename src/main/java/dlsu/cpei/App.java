@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * JavaFX App
@@ -16,10 +17,11 @@ public class App extends Application {
     private static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("main"));
+        scene = new Scene(loadFXML("welcome"));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Notium");
+        stage.setTitle("Welcome to Notium");
     }
 
     static void setRoot(String fxml) throws IOException {

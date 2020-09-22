@@ -1,29 +1,27 @@
 /*
-* MainController.java that controls the main.fxml file
+* MainController.java that controls the notepadProper.fxml file
 *
 * */package dlsu.cpei;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import dlsu.cpei.App;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.commonmark.node.Node;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
-
-public class MainController {
+public class NotepadProperController implements FileOpenerInterface {
     public TextArea mainArea;
     public AnchorPane anchorPane;
     public Text currentFile;
     public Text changeNotifier;
+    public WebView webViewPane;
     private String filePath = null;
 
     @FXML
@@ -44,10 +42,10 @@ public class MainController {
     *
     * */
     @FXML
-    private void openText() throws IOException{
+    public void openFile(){
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         FileChooser file = new FileChooser();
-        configureFileChooser(file);
+        configureFileOpener(file);
         file.setTitle("Open markdown");
         File selectedFile = file.showOpenDialog(stage);
         try{
@@ -71,7 +69,7 @@ public class MainController {
     * If it's not null, it will simply save write to the path given by the filePath String.
     */
     @FXML
-    private void saveText() throws IOException{
+    public void saveFile() throws IOException{
         if(filePath != null){
             byte[] strToBytes = mainArea.getText().getBytes();
             Files.write(Path.of(filePath), strToBytes);
@@ -79,7 +77,7 @@ public class MainController {
         } else {
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             FileChooser file = new FileChooser();
-            configureFileChooser(file);
+            configureFileOpener(file);
             file.setInitialFileName("note.md");
             file.setTitle("Save .md");
             try{
@@ -102,7 +100,7 @@ public class MainController {
     * .md files
     *
     * */
-    private static void configureFileChooser(FileChooser fileChooser){
+    public void configureFileOpener(FileChooser fileChooser){
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Markdown", "*.md"));
     }
@@ -117,23 +115,21 @@ public class MainController {
         changeNotifier.setVisible(true);
     }
 
-
     /*
     * Switches to the state of notifier.
     * */
     private void switchNotify(){
-        if(changeNotifier.isVisible()){
-            changeNotifier.setVisible(false);
-        } else {
-            changeNotifier.setVisible(true);
-        }
+        changeNotifier.setVisible(!changeNotifier.isVisible());
     }
 
-    private void convertMDToHTML(){
-        Parser parser = Parser.builder().build();
-        Node document = parser.parse(mainArea.getText());
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
-        renderer.render(document);
+    /*
+    * Converts the markdown into HTML that the WebViewPane
+    * will be able to showcase.
+    * */
+    @FXML
+    private void showcaseHTML(){
+        Renderer renderer = new Renderer();
+        String renderedDocument = renderer.renderDocument(renderer.convertStringToNode(mainArea.getText()));
+        webViewPane.getEngine().loadContent(renderedDocument, "text/html");
     }
-
 }

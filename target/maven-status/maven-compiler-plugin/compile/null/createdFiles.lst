@@ -1,5 +1,8 @@
-dlsu/cpei/MainController.class
-module-info.class
+dlsu/cpei/FileOpenerInterface.class
 dlsu/cpei/PrimaryController.class
 dlsu/cpei/App.class
+dlsu/cpei/WelcomeController.class
 dlsu/cpei/SecondaryController.class
+dlsu/cpei/Renderer.class
+module-info.class
+dlsu/cpei/NotepadProperController.class
