@@ -23,7 +23,20 @@ public class NotepadProperController implements FileOpenerInterface {
     public Text changeNotifier;
     public WebView webViewPane;
     private String filePath = null;
+    private String currentDirectory;
 
+    void initialize(){}
+    /*
+    * Responsible for setting the current controller's
+    * data.
+    *
+    * */
+    void initData(String currentDirectory){
+        setCurrentDirectory(currentDirectory);
+    }
+    private void setCurrentDirectory(String currentDirectory){
+        this.currentDirectory = currentDirectory;
+    }
     @FXML
     private void readText() throws IOException{
         System.out.println(mainArea.getText());
@@ -31,7 +44,16 @@ public class NotepadProperController implements FileOpenerInterface {
 
     @FXML
     private void newFile(){
-
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        SaveFile saveFile = new SaveFile(stage, currentFile, mainArea, currentDirectory);
+        saveFile.saveNote();
+        /*
+        * Reinitialize the notepad area.
+        * */
+        mainArea.clear();
+        changeNotifier.setVisible(false);
+        filePath = null;
+        webViewPane.getEngine().loadContent("");
     }
     /*
     *
@@ -76,23 +98,9 @@ public class NotepadProperController implements FileOpenerInterface {
             switchNotify();
         } else {
             Stage stage = (Stage) anchorPane.getScene().getWindow();
-            FileChooser file = new FileChooser();
-            configureFileOpener(file);
-            file.setInitialFileName("note.md");
-            file.setTitle("Save .md");
-            try{
-                File selectedFile = file.showSaveDialog(stage);
-                byte[] strToBytes = mainArea.getText().getBytes(); //converts the mainArea text to bytes
-                Files.write(Path.of(selectedFile.getPath()), strToBytes); //writes to the file name given by the user
-                filePath = selectedFile.getPath();
-                currentFile.setText(selectedFile.getName());
-                switchNotify();
-            } catch(Exception e){
-                //TODO file error dialogue
-                System.out.println("Error!"); //will replace with its own dialogue
-            }
+            SaveFile saveFile = new SaveFile(stage, currentFile, mainArea, currentDirectory);
+            saveFile.saveNote();
         }
-
     }
 
     /*
@@ -101,7 +109,7 @@ public class NotepadProperController implements FileOpenerInterface {
     *
     * */
     public void configureFileOpener(FileChooser fileChooser){
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialDirectory(new File(currentDirectory));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Markdown", "*.md"));
     }
 
