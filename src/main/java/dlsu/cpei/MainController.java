@@ -15,12 +15,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 public class MainController {
     public TextArea mainArea;
     public AnchorPane anchorPane;
     public Text currentFile;
-    private String currentStringFile = null;
+    public Text changeNotifier;
     private String filePath = null;
 
     @FXML
@@ -28,6 +31,10 @@ public class MainController {
         System.out.println(mainArea.getText());
     }
 
+    @FXML
+    private void newFile(){
+
+    }
     /*
     *
     * Handles opening a markdown file. The file chooser has a filter applied,
@@ -47,6 +54,7 @@ public class MainController {
             String mdContents = Files.readString(Path.of(selectedFile.getPath()));
             mainArea.setText(mdContents);
             currentFile.setText(selectedFile.getName());
+            switchNotify();
         } catch(Exception e){
             //TODO file error dialogue
             System.out.println("Error"); //will replace with its own dialogue
@@ -67,6 +75,7 @@ public class MainController {
         if(filePath != null){
             byte[] strToBytes = mainArea.getText().getBytes();
             Files.write(Path.of(filePath), strToBytes);
+            switchNotify();
         } else {
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             FileChooser file = new FileChooser();
@@ -79,6 +88,7 @@ public class MainController {
                 Files.write(Path.of(selectedFile.getPath()), strToBytes); //writes to the file name given by the user
                 filePath = selectedFile.getPath();
                 currentFile.setText(selectedFile.getName());
+                switchNotify();
             } catch(Exception e){
                 //TODO file error dialogue
                 System.out.println("Error!"); //will replace with its own dialogue
@@ -102,12 +112,28 @@ public class MainController {
     * currentFile Text.
     *
     * */
+    @FXML
     private void notifyChanges(){
-
+        changeNotifier.setVisible(true);
     }
 
-    private static void convertMDToHTML(){
 
+    /*
+    * Switches to the state of notifier.
+    * */
+    private void switchNotify(){
+        if(changeNotifier.isVisible()){
+            changeNotifier.setVisible(false);
+        } else {
+            changeNotifier.setVisible(true);
+        }
+    }
+
+    private void convertMDToHTML(){
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(mainArea.getText());
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        renderer.render(document);
     }
 
 }

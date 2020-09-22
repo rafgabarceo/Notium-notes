@@ -1,1 +1,5 @@
 dlsu/cpei/MainController.class
+module-info.class
+dlsu/cpei/PrimaryController.class
+dlsu/cpei/App.class
+dlsu/cpei/SecondaryController.class

@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.WebView?>
 
 <VBox fx:id="textWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dlsu.cpei.MainController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="837.0">
         <items>
+            <Button fx:id="saveButton1" mnemonicParsing="false" onAction="#saveText" text="New" />
             <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveText" text="Save" />
             <Button fx:id="openButton" mnemonicParsing="false" onAction="#openText" text="Open" />
             <SplitMenuButton fx:id="renderButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#readText" text="Render">
@@ -27,19 +23,25 @@
       </ToolBar>
       <AnchorPane fx:id="anchorPane" prefHeight="597.0" prefWidth="837.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextArea fx:id="mainArea" layoutY="40.0" prefHeight="558.0" prefWidth="837.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <padding>
-                  <Insets bottom="25.0" left="30.0" right="30.0" top="50.0" />
-               </padding>
-               <font>
-                  <Font name="Fira Mono" size="17.0" />
-               </font>
-            </TextArea>
+            <SplitPane dividerPositions="0.5" prefHeight="555.0" prefWidth="837.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  <TextArea fx:id="mainArea" onKeyPressed="#notifyChanges" prefHeight="506.0" prefWidth="737.0" wrapText="true">
+                     <padding>
+                        <Insets bottom="25.0" left="30.0" right="30.0" top="50.0" />
+                     </padding>
+                     <font>
+                        <Font name="Fira Mono" size="17.0" />
+                     </font>
+                  </TextArea>
+                  <WebView prefHeight="200.0" prefWidth="200.0" />
+               </items>
+            </SplitPane>
             <Text fx:id="currentFile" layoutX="128.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="581.7294921875">
                <font>
                   <Font name="Fira Mono Medium" size="24.0" />
                </font>
             </Text>
+            <Text fx:id="changeNotifier" layoutX="794.0" layoutY="546.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" visible="false" />
          </children>
       </AnchorPane>
    </children>
