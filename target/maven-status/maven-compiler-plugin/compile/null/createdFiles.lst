@@ -2,6 +2,7 @@ dlsu/cpei/FileOpenerInterface.class
 dlsu/cpei/PrimaryController.class
 dlsu/cpei/App.class
 dlsu/cpei/SaveFile.class
+dlsu/cpei/OpenFileBridge.class
 dlsu/cpei/WelcomeController.class
 dlsu/cpei/SecondaryController.class
 dlsu/cpei/Renderer.class

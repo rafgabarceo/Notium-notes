@@ -10,11 +10,11 @@
    <children>
       <ToolBar prefHeight="40.0" prefWidth="837.0">
         <items>
-            <Button fx:id="newButton" mnemonicParsing="false" onAction="#newFile" text="New" />
+            <Button fx:id="newButton" mnemonicParsing="false" onAction="#newFile" text="New Note" />
             <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" text="Save" />
-            <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFile" text="Open" />
+            <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFile" text="Open Notebook" />
             <Button fx:id="renderButton" mnemonicParsing="false" onAction="#showcaseHTML" text="Render" />
-            <Button fx:id="toggleTreeView" mnemonicParsing="false" onAction="#invokeTree" text="Show notes" />
+            <Button fx:id="toggleTreeView" mnemonicParsing="false" onAction="#invokeTree" text="Refresh Trees" />
         </items>
       </ToolBar>
       <AnchorPane fx:id="anchorPane" prefHeight="597.0" prefWidth="837.0" VBox.vgrow="ALWAYS">

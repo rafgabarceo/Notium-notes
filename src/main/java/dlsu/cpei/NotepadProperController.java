@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -30,6 +31,7 @@ public class NotepadProperController implements FileOpenerInterface {
     public TreeView treeviewPane;
     private String filePath = null;
     private String currentDirectory;
+    private OpenFileBridge fileBridge = new OpenFileBridge();
     /*
     * Responsible for setting the current controller's
     * data.
@@ -70,19 +72,7 @@ public class NotepadProperController implements FileOpenerInterface {
     @FXML
     public void openFile(){
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        FileChooser file = new FileChooser();
-        configureFileOpener(file);
-        file.setTitle("Open markdown");
-        File selectedFile = file.showOpenDialog(stage);
-        try{
-            String mdContents = Files.readString(Path.of(selectedFile.getPath()));
-            mainArea.setText(mdContents);
-            currentFile.setText(selectedFile.getName());
-            switchNotify();
-        } catch(Exception e){
-            //TODO file error dialogue
-            System.out.println("Error"); //will replace with its own dialogue
-        }
+        fileBridge.directoryOpener(stage);
     }
 
     /*
@@ -151,5 +141,13 @@ public class NotepadProperController implements FileOpenerInterface {
     /*Handles events that happen when the user clicks on a notebook in the TreeView*/
     public void mouseClick(MouseEvent mouseEvent) throws IOException {
         TreeItem item = (TreeItem) treeviewPane.getSelectionModel().getSelectedItem();
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        File filePrevious = new File(currentDirectory + "/" +currentFile.getText());
+        File fileNext = new File(currentDirectory + "/" + item.getValue());
+        SaveFile filePlayer = new SaveFile(stage, currentFile, mainArea, currentDirectory);
+        filePlayer.saveNoteNoDialogue(filePrevious);
+        String refresh = filePlayer.readNoteForOpen(fileNext);
+        mainArea.setText(refresh);
+        currentFile.setText(fileNext.getName());
     }
 }
