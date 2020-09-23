@@ -6,7 +6,9 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
@@ -28,8 +30,6 @@ public class NotepadProperController implements FileOpenerInterface {
     public TreeView treeviewPane;
     private String filePath = null;
     private String currentDirectory;
-
-    void initialize(){}
     /*
     * Responsible for setting the current controller's
     * data.
@@ -85,7 +85,6 @@ public class NotepadProperController implements FileOpenerInterface {
         }
     }
 
-
     /*
     * This is a rather simple implementation of saving a file.
     * A new implementation of the saveText was applied. The method will check
@@ -135,8 +134,8 @@ public class NotepadProperController implements FileOpenerInterface {
     }
 
     @FXML
-    private void toggleTreeView(){
-
+    private void invokeTree(){
+        NotebookView notebookView = new NotebookView(currentDirectory, treeviewPane);
     }
     /*
     * Converts the markdown into HTML that the WebViewPane
@@ -147,5 +146,10 @@ public class NotepadProperController implements FileOpenerInterface {
         Renderer renderer = new Renderer();
         String renderedDocument = renderer.renderDocument(renderer.convertStringToNode(mainArea.getText()));
         webViewPane.getEngine().loadContent(renderedDocument, "text/html");
+    }
+
+    /*Handles events that happen when the user clicks on a notebook in the TreeView*/
+    public void mouseClick(MouseEvent mouseEvent) throws IOException {
+        TreeItem item = (TreeItem) treeviewPane.getSelectionModel().getSelectedItem();
     }
 }
