@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -20,22 +21,33 @@ import java.nio.file.Paths;
 public class WelcomeController implements FileOpenerInterface{
     public VBox mainBox;
 
+    /*
+    * This method is similar to that of the saveFile function. However,
+    * it will only open directories.
+    *
+    * I'm planning to maybe add the tree-list view in the
+    * notebook itself. This is so that the user can simply click on an
+    * item instead of pressing open in the notepadProper window.
+    *
+    * Will try to find a way to implement it properly.
+    *
+    * I've recently learned about something called the DirectoryChooser. I think that
+    * Will be a better thing to use in our case. Instead of opening files, it will open
+    * Directories, which will usually act as the notebooks.
+    * */
     @FXML
     public void openFile(){ //for open notebook
-        /*Stage stage = (Stage) mainBox.getScene().getWindow();
-        FileChooser file = new FileChooser();
-        configureFileOpener(file);
-        file.setTitle("Open Notebook");
+        Stage stage = (Stage) mainBox.getScene().getWindow();
+        DirectoryChooser directory = new DirectoryChooser();
+        directory.setTitle("Open Notebook");
         try{
-            File selectedFile = file.showOpenDialog(stage);
-            Files.createDirectory(Paths.get(selectedFile.getPath()));
-            String dir = selectedFile.getPath();
-            loadNotepad(selectedFile.getName(), dir);
+            File selectedDirectory = directory.showDialog(stage);
+            loadNotepad(selectedDirectory.getName(), selectedDirectory.getPath());
             stage.close();
         } catch(Exception e){
             //TODO file error dialogue
             e.printStackTrace();
-        }*/
+        }
     }
     @FXML
     public void saveFile(){ //for new notebook
