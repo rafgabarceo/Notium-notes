@@ -4,7 +4,9 @@
 * */package dlsu.cpei;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
@@ -22,6 +24,8 @@ public class NotepadProperController implements FileOpenerInterface {
     public Text currentFile;
     public Text changeNotifier;
     public WebView webViewPane;
+    public Button toggleTreeView;
+    public TreeView treeviewPane;
     private String filePath = null;
     private String currentDirectory;
 
@@ -130,6 +134,10 @@ public class NotepadProperController implements FileOpenerInterface {
         changeNotifier.setVisible(!changeNotifier.isVisible());
     }
 
+    @FXML
+    private void toggleTreeView(){
+
+    }
     /*
     * Converts the markdown into HTML that the WebViewPane
     * will be able to showcase.

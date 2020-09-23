@@ -5,49 +5,56 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dlsu.cpei.NotepadProperController">
+
+<VBox fx:id="textWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dlsu.cpei.NotepadProperController">
    <children>
-      <VBox fx:id="textWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="837.0">
+      <ToolBar prefHeight="40.0" prefWidth="837.0">
+        <items>
+            <Button fx:id="newButton" mnemonicParsing="false" onAction="#newFile" text="New" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" text="Save" />
+            <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFile" text="Open" />
+            <Button fx:id="renderButton" mnemonicParsing="false" onAction="#showcaseHTML" text="Render" />
+            <Button fx:id="toggleTreeView" mnemonicParsing="false" text="Show notes" />
+        </items>
+      </ToolBar>
+      <AnchorPane fx:id="anchorPane" prefHeight="597.0" prefWidth="837.0" VBox.vgrow="ALWAYS">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="837.0">
-              <items>
-                  <Button fx:id="newButton" mnemonicParsing="false" onAction="#newFile" text="New" />
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" text="Save" />
-                  <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFile" text="Open" />
-                  <Button fx:id="renderButton" mnemonicParsing="false" onAction="#showcaseHTML" text="Render" />
-              </items>
-            </ToolBar>
-            <AnchorPane fx:id="anchorPane" prefHeight="597.0" prefWidth="837.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <SplitPane dividerPositions="0.5" prefHeight="555.0" prefWidth="837.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <items>
-                        <TextArea fx:id="mainArea" onKeyPressed="#notifyChanges" prefHeight="506.0" prefWidth="737.0" wrapText="true">
-                           <padding>
-                              <Insets bottom="25.0" left="30.0" right="30.0" top="50.0" />
-                           </padding>
-                           <font>
-                              <Font name="Ubuntu Mono" size="17.0" />
-                           </font>
-                        </TextArea>
-                        <WebView fx:id="webViewPane" prefHeight="200.0" prefWidth="200.0" />
-                     </items>
-                  </SplitPane>
-                  <Text fx:id="changeNotifier" layoutX="45.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" visible="false" />
-                  <Text fx:id="currentFile" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="204.7294921875" AnchorPane.bottomAnchor="514.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="582.2705078125" AnchorPane.topAnchor="10.0">
+            <SplitPane dividerPositions="0.5" prefHeight="555.0" prefWidth="837.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  <TextArea fx:id="mainArea" onKeyPressed="#notifyChanges" prefHeight="506.0" prefWidth="737.0" wrapText="true">
+                     <padding>
+                        <Insets bottom="25.0" left="30.0" right="30.0" top="50.0" />
+                     </padding>
                      <font>
-                        <Font name="Fira Mono Medium" size="24.0" />
+                        <Font name="Ubuntu Mono" size="17.0" />
                      </font>
-                  </Text>
-               </children>
-            </AnchorPane>
+                  </TextArea>
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <items>
+                        <WebView fx:id="webViewPane" prefHeight="200.0" prefWidth="311.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <TreeView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </items>
+            </SplitPane>
+            <Text fx:id="changeNotifier" layoutX="45.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" visible="false" />
+            <Text fx:id="currentFile" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="204.7294921875" AnchorPane.bottomAnchor="514.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="582.2705078125" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Fira Mono Medium" size="24.0" />
+               </font>
+            </Text>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
-</Pane>
+</VBox>
