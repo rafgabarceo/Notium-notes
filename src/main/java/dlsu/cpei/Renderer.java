@@ -15,10 +15,10 @@ import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
 import org.commonmark.ext.image.attributes.ImageAttributesExtension;
+import org.commonmark.ext.task.list.items.TaskListItemsExtension;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +30,8 @@ public class Renderer {
         extensions = Arrays.asList(StrikethroughExtension.create(),
                 TablesExtension.create(),
                 YamlFrontMatterExtension.create(),
-                ImageAttributesExtension.create());
+                ImageAttributesExtension.create(),
+                TaskListItemsExtension.create());
         this.parser = Parser.builder()
                 .extensions(extensions)
                 .build();

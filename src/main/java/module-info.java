@@ -7,6 +7,7 @@ module dlsu.cpei {
     requires org.commonmark.ext.gfm.strikethrough;
     requires org.commonmark.ext.gfm.tables;
     requires org.commonmark.ext.image.attributes;
+    requires org.commonmark.ext.task.list.items;
 
     opens dlsu.cpei to javafx.fxml;
     exports dlsu.cpei;

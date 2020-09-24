@@ -1,11 +1,9 @@
 /home/rgarceo/IdeaProjects/Notium/src/main/java/module-info.java
-/home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/PrimaryController.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/Renderer.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/NotepadProperController.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/SaveFile.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/OpenFileBridge.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/WelcomeController.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/App.java
-/home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/SecondaryController.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/NotebookView.java
 /home/rgarceo/IdeaProjects/Notium/src/main/java/dlsu/cpei/FileOpenerInterface.java

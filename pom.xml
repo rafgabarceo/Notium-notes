@@ -34,6 +34,11 @@
         </dependency>
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark-ext-task-list-items</artifactId>
+            <version>0.15.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
             <artifactId>commonmark-ext-image-attributes</artifactId>
             <version>0.15.2</version>
         </dependency>

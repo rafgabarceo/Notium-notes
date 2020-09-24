@@ -4,19 +4,14 @@
 * */
 package dlsu.cpei;
 
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class NotebookView {
-    private ArrayList<TreeItem> notes;
+    private ArrayList<TreeItem<String>> notes;
     private String currentDirectory;
     private TreeView treeView;
     public NotebookView(String currentDirectory, TreeView treeView){
@@ -42,15 +37,20 @@ public class NotebookView {
     * Responsible for showing the current files in the directory chosen by the user.
     *
     * */
-    private ArrayList<TreeItem> scanDirectory(){
-        ArrayList<TreeItem> notes = new ArrayList<TreeItem>();
+    private ArrayList<TreeItem<String>> scanDirectory(){
+        ArrayList<TreeItem<String>> notes = new ArrayList<TreeItem<String>>();
         String[] pathNames;
-        File directory = new File(currentDirectory);
-        pathNames = directory.list();
-        for(String note : pathNames){
-            TreeItem noteNode = new TreeItem(note);
-            notes.add(noteNode);
+        try{
+            File directory = new File(currentDirectory);
+            pathNames = directory.list();
+            for(String note : pathNames){
+                TreeItem<String> noteNode = new TreeItem(note);
+                notes.add(noteNode);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
         }
+
         return notes;
     }
 }

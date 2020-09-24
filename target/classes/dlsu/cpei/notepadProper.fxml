@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
 <VBox fx:id="textWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="1059.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dlsu.cpei.NotepadProperController">
    <children>
       <ToolBar prefHeight="40.0" prefWidth="837.0">
         <items>
             <Button fx:id="newButton" mnemonicParsing="false" onAction="#newFile" text="New Note" />
-            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" text="Save" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFileClassWrapper" text="Save" />
+            <Button fx:id="saveAsButton" mnemonicParsing="false" onAction="#saveFile" text="Save As..." />
             <Button fx:id="openButton" mnemonicParsing="false" onAction="#openFile" text="Open Notebook" />
             <Button fx:id="renderButton" mnemonicParsing="false" onAction="#showcaseHTML" text="Render" />
             <Button fx:id="toggleTreeView" mnemonicParsing="false" onAction="#invokeTree" text="Refresh Trees" />

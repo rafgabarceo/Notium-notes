@@ -1,7 +1,5 @@
 package dlsu.cpei;
 
-import javafx.stage.FileChooser;
-
 import java.io.IOException;
 
 interface FileOpenerInterface {

@@ -12,8 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -96,14 +94,11 @@ public class NotepadProperController implements FileOpenerInterface {
         }
     }
 
-    /*
-    * Sets the filters available for the FileChooser. This is what makes it only read
-    * .md files
-    *
-    * */
-    public void configureFileOpener(FileChooser fileChooser){
-        fileChooser.setInitialDirectory(new File(currentDirectory));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Markdown", "*.md"));
+    @FXML
+    public void saveFileClassWrapper() throws IOException {
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        SaveFile saveFile = new SaveFile(stage, currentFile, mainArea, currentDirectory);
+        saveFile.saveNoteNoDialogue(new File(currentDirectory + "/" +currentFile.getText()));
     }
 
     /*
@@ -142,12 +137,20 @@ public class NotepadProperController implements FileOpenerInterface {
     public void mouseClick(MouseEvent mouseEvent) throws IOException {
         TreeItem item = (TreeItem) treeviewPane.getSelectionModel().getSelectedItem();
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        File filePrevious = new File(currentDirectory + "/" +currentFile.getText());
-        File fileNext = new File(currentDirectory + "/" + item.getValue());
         SaveFile filePlayer = new SaveFile(stage, currentFile, mainArea, currentDirectory);
-        filePlayer.saveNoteNoDialogue(filePrevious);
-        String refresh = filePlayer.readNoteForOpen(fileNext);
-        mainArea.setText(refresh);
-        currentFile.setText(fileNext.getName());
+        try{
+            File filePrevious = new File(currentDirectory + "/" +currentFile.getText());
+            File fileNext = new File(currentDirectory + "/" + item.getValue());
+            filePlayer.saveNoteNoDialogue(filePrevious);
+            String refresh = filePlayer.readNoteForOpen(fileNext);
+            mainArea.setText(refresh);
+            currentFile.setText(fileNext.getName());
+        } catch(Exception e){
+            File fileNext = new File(currentDirectory + "/" + item.getValue());
+            String refresh = filePlayer.readNoteForOpen(fileNext);
+            mainArea.setText(refresh);
+            currentFile.setText(fileNext.getName());
+        }
+
     }
 }
