@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Notium">
+    <output-path>$PROJECT_DIR$/out/artifacts/Notium</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="dlsu.cpei.App" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Notium Notes" />
+        <option name="vendor" value="" />
+        <option name="version" value="0.0.1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Notium.jar">
+        <element id="module-output" name="Notium" />
+      </element>
+    </root>
+  </artifact>
+</component>
