@@ -1,8 +1,9 @@
+module-info.class
 dlsu/cpei/FileOpenerInterface.class
+dlsu/cpei/NotepadProperController.class
 dlsu/cpei/App.class
 dlsu/cpei/SaveFile.class
 dlsu/cpei/OpenFileBridge.class
 dlsu/cpei/WelcomeController.class
 dlsu/cpei/Renderer.class
-module-info.class
-dlsu/cpei/NotepadProperController.class
+dlsu/cpei/NotebookView.class
